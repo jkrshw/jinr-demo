@@ -9,11 +9,13 @@
         href="../styles/styles.css">
 </head>
 <body>
+  <span id="browser-sync-binding"></span>
   <template is="dom-bind">
-    <iron-ajax auto url="/echo/hello"
-               handle-as="json"
-               last-response="{{response}}"
-               params='{"echo":"true"}'>
+    <iron-ajax auto
+        th:attr="url=@{/echo/hello}" url="/hello.json"
+        handle-as="json"
+        last-response="{{response}}"
+        params='{"echo":"true"}'>
     </iron-ajax>
     <h1>{{response.message}}</h1>
   </template>

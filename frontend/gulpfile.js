@@ -232,8 +232,16 @@ gulp.task('serve', ['styles'], function() {
     //       will present a certificate warning in the browser.
     // https: true,
     server: {
-      baseDir: ['.tmp', 'app'],
-      middleware: [historyApiFallback()]
+      baseDir: ['.tmp', 'app', 'app/templates', 'data'],
+      middleware: [
+        historyApiFallback(),
+        function (req, res, next) {
+          var q = req.url.indexOf('?');
+          if (q > 0) {
+            req.url = req.url.substring(0, q);
+          }
+          next();
+        }]
     }
   });
 
